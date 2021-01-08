@@ -5,8 +5,8 @@ using System.Threading;
 
 public class Factorymethod : MonoBehaviour {
     void Start() {
-        // ExcuteObservableCreate();
-        // ExcuteObservableStart();
+        ExcuteObservableCreate();
+        ExcuteObservableStart();
         ExcuteObservableTimer();
     }
 
@@ -56,29 +56,29 @@ public class Factorymethod : MonoBehaviour {
             });
     }
 
-/// <summary>
-/// ObservableTimerの実行
-/// </summary>
-private void ExcuteObservableTimer() {
-    // 実時間で指定し、経過後発火
-    Observable
-        .Timer(TimeSpan.FromSeconds(1))
-        .Subscribe(x => {
-            Debug.Log("1秒経ちました");
-        });
+    /// <summary>
+    /// ObservableTimerの実行
+    /// </summary>
+    private void ExcuteObservableTimer() {
+        // 実時間で指定し、経過後発火
+        Observable
+            .Timer(TimeSpan.FromSeconds(1))
+            .Subscribe(x => {
+                Debug.Log("1秒経ちました");
+            });
 
-    // フレームで指定し、経過後発火
-    Observable
-        .TimerFrame(1)
-        .Subscribe(x => {
-            Debug.Log("1フレーム経ちました");
-        });
+        // フレームで指定し、経過後発火
+        Observable
+            .TimerFrame(1)
+            .Subscribe(x => {
+                Debug.Log("1フレーム経ちました");
+            });
 
-    Observable
-        // 停止させない限り、動き続ける
-        .Timer(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2))
-        .Subscribe(x => {
-            Debug.Log("1秒経ちました、停止されるまで実行します。");
-        });
-}
+        Observable
+            // 停止させない限り、動き続ける
+            .Timer(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2))
+            .Subscribe(x => {
+                Debug.Log("1秒経ちました、停止されるまで実行します。");
+            });
+    }
 }
