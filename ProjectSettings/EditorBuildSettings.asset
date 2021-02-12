@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CoroutineToObservable.unity
+    guid: a7b00e485718c4b93b46890444e0d598
   m_configObjects: {}
