@@ -27,6 +27,11 @@ public class Factory : MonoBehaviour
     [SerializeField]
     private Methods _methodStatus;
 
+    private bool _isInitialize = false;
+    void Start() {
+        _isInitialize = true;
+    }
+
     void OnValidate() {
         ExcuteMethods();
     }
@@ -307,6 +312,9 @@ public class Factory : MonoBehaviour
     /// 各メソッドの実行
     /// </summary>
     private void ExcuteMethods() {
+        if (!_isInitialize) {
+            return;
+        }
         switch (_methodStatus) {
             case Methods.RETURN :
                 ExcuteReturn();
