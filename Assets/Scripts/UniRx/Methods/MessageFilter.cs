@@ -337,8 +337,7 @@ public class MessageFilter : MonoBehaviour {
 
     private void ExcuteMethods() {
         if (!_isInitialize) {
-            // このコメントアウト外すとデバッグしにくいからコメント
-            // return;
+            return;
         }
         switch (_methodStatus) {
             case Methods.WHERE :
