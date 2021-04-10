@@ -145,7 +145,7 @@ public class ObservableCalculation : MonoBehaviour {
 
     private void ExcuteMethods() {
         if (!_isInitialize) {
-            // return;
+            return;
         }
         switch (_methodStatus) {
             case Methods.SCAN_LIST :
