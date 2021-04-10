@@ -28,10 +28,8 @@ public class ObservableCalculation : MonoBehaviour {
         ExcuteMethods();
     }
 
-    // onComplete時の挙動一応書く
-
     /// <summary>
-    /// 前回のメッセージの値と今回の値を使用する
+    /// 前回のメッセージの値と今回の値を加算する
     /// </summary>
     private void ExcuteScanList() {
         Observable
@@ -39,6 +37,8 @@ public class ObservableCalculation : MonoBehaviour {
             .Scan((a, b) => a + b)
             .Subscribe(x => {
                 Debug.Log(string.Format("ScanList onNext : " + x));
+            }, () => {
+                Debug.Log(string.Format("ScanList onCompleted"));
             });
     }
 
@@ -54,6 +54,8 @@ public class ObservableCalculation : MonoBehaviour {
             .Scan((a, b) => a + b)
             .Subscribe(x => {
                 Debug.Log(string.Format("ScanOnAnyKeyDown onNext : " + x));
+            }, () => {
+                Debug.Log(string.Format("ScanOnAnyKeyDown onCompleted"));
             });
     }
 
@@ -66,9 +68,12 @@ public class ObservableCalculation : MonoBehaviour {
         Observable
             .Range(1, 5)
             .Select(x => x.ToString())
+            // Buffer(2, 2)と同じ
             .Buffer(2)
             .Subscribe(x => {
                 Debug.Log("Buffer : " + x.Aggregate<string>((sum, n) => sum.ToString() + ", " + n.ToString()));
+            }, () => {
+                Debug.Log(string.Format("Buffer onCompleted"));
             });
     }
 
@@ -84,11 +89,13 @@ public class ObservableCalculation : MonoBehaviour {
             .Buffer(3, 2)
             .Subscribe(x => {
                 Debug.Log("Buffer : " + x.Aggregate<string>((sum, n) => sum.ToString() + ", " + n.ToString()));
+            }, () => {
+                Debug.Log(string.Format("Buffer onCompleted"));
             });
     }
 
     /// <summary>
-    /// 指定したObservableにメッセージが発行されるまで待つ
+    /// 指定したObservableにメッセージが発行されるまでメッセージをまとめる
     /// ダブルクリック検知
     /// </summary>
     private void ExcuteBufferDoubleClick()
@@ -102,6 +109,8 @@ public class ObservableCalculation : MonoBehaviour {
             .Where(x=> x.Count == 2)
             .Subscribe(x => {
                 Debug.Log("Buffer : Double Click");
+            }, () => {
+                Debug.Log(string.Format("Buffer onCompleted"));
             });
     }
 
@@ -113,9 +122,12 @@ public class ObservableCalculation : MonoBehaviour {
     {
         Observable
             .Range(1, 5)
+            // 2つのメッセージを1つにまとめる
             .Pairwise()
             .Subscribe(x => {
                 Debug.Log(string.Format("Pairwise : {0}, {1}", x.Previous, x.Current));
+            }, () => {
+                Debug.Log(string.Format("Pairwise : onCompleted"));
             });
 
         // 比較用
@@ -125,6 +137,8 @@ public class ObservableCalculation : MonoBehaviour {
             .Buffer(2, 1)
             .Subscribe(x => {
                 Debug.Log("Buffer    : " + x.Aggregate<string>((sum, n) => sum.ToString() + ", " + n.ToString()));
+            }, () => {
+                Debug.Log(string.Format("Buffer    : onCompleted"));
             });
 
     }
