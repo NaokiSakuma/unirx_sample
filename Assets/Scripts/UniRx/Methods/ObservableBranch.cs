@@ -110,7 +110,7 @@ public class ObservableBranch : MonoBehaviour {
         });
         yield return new WaitForSeconds(2);
         stream.Subscribe(x => {
-            Debug.Log("Second Value :  " + x);
+            Debug.Log(string.Format("<color=blue>Second Value : {0}</color>", x));
         });
     }
 
@@ -128,7 +128,7 @@ public class ObservableBranch : MonoBehaviour {
         });
         yield return new WaitForSeconds(2);
         stream.Subscribe(x => {
-            Debug.Log("Second Value :  " + x);
+            Debug.Log(string.Format("<color=blue>Second Value : {0}</color>", x));
         });
         // Connectは全てのサブスクリプションが終わってから呼び出すと
         // コルーチンやスレッドでズレることは無くなる
@@ -159,7 +159,7 @@ public class ObservableBranch : MonoBehaviour {
         this.UpdateAsObservable()
             .Where(_ => Input.anyKeyDown)
             .Subscribe(_ => {
-                Debug.Log("Call Dispose");
+                Debug.Log("<color=red>Call Dispose</color>");
                 subscription.Dispose();
             });
     }
@@ -177,6 +177,7 @@ public class ObservableBranch : MonoBehaviour {
                                             Debug.Log("Publish : " + x);
                                         })
                                         .Publish()
+                                        // ObserverがあればConnect、なければDispose
                                         .RefCount();
 
         IDisposable subscription = stream
@@ -188,7 +189,7 @@ public class ObservableBranch : MonoBehaviour {
         this.UpdateAsObservable()
             .Where(_ => Input.anyKeyDown)
             .Subscribe(_ => {
-                Debug.Log("Call Dispose");
+                Debug.Log("<color=red>Call Dispose</color>");
                 subscription.Dispose();
             });
     }
@@ -215,7 +216,7 @@ public class ObservableBranch : MonoBehaviour {
         this.UpdateAsObservable()
             .Where(_ => Input.anyKeyDown)
             .Subscribe(_ => {
-                Debug.Log("Call Dispose");
+                Debug.Log("<color=red>Call Dispose</color>");
                 subscription.Dispose();
             });
     }
@@ -265,9 +266,9 @@ public class ObservableBranch : MonoBehaviour {
     {
         TimeSpan time = TimeSpan.FromSeconds(1);
         var stream = Observable
-                                                .Interval(time)
-                                                .Take(3)
-                                                .Publish();
+                        .Interval(time)
+                        .Take(3)
+                        .Publish();
         stream.Connect();
         var replayStream = stream.Replay();
         replayStream.Connect();
@@ -277,7 +278,7 @@ public class ObservableBranch : MonoBehaviour {
         }).AddTo(this);
         yield return new WaitForSeconds(2);
         stream.Subscribe(x => {
-            Debug.Log("Second Value :  " + x);
+            Debug.Log(string.Format("<color=blue>Second Value : {0}</color>", x));
         });
         // 実行が遅れて取得できなかった値もReplayだと出る
         replayStream.Subscribe(x => {
