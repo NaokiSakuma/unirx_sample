@@ -24,7 +24,6 @@ public class MessageCast : MonoBehaviour {
         TIME_INTERVAL,
         TIME_STAMP,
         AS_UNIT_OBSERVABLE,
-        AS_UNIT_OBSERVABLE_USE,
     }
 
     [SerializeField]
