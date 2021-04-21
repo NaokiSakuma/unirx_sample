@@ -184,7 +184,7 @@ public class MessageCast : MonoBehaviour {
         Observable
             .Materialize(stream)
             .Subscribe(x => {
-                Debug.Log("Materialize onNext : " + x);
+                Debug.Log("Materialize onNext : <color=blue>" + x + "</color>");
             }, () => {
                 Debug.Log("Materialize onComplete");
             });
@@ -194,7 +194,7 @@ public class MessageCast : MonoBehaviour {
             .Throw<Unit>(new Exception("Error Message"))
             .Materialize()
             .Subscribe(x => {
-                Debug.Log("Materialize onNext : " + x);
+                Debug.Log("Materialize onNext : <color=blue>" + x + "</color>");
             });
 
     }
