@@ -29,18 +29,15 @@ public class ObservableBranch : MonoBehaviour {
 
     void Start() {
         _isInitialize = true;
-    }
-
-    void OnValidate() {
-        ExcuteMethods();
-    }
-
-    void Update() {
         this.UpdateAsObservable()
             .Where(_ => _isDo)
             .Subscribe(_ => {
                 _isDo = false;
             });
+    }
+
+    void OnValidate() {
+        ExcuteMethods();
     }
 
     /// <summary>

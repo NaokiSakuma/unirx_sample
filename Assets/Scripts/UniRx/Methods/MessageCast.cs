@@ -13,7 +13,6 @@ public class Drakee : Enemy { };
 
 public class MessageCast : MonoBehaviour {
 
-    // 後で並び順を整理する
     private enum Methods {
         SELECT,
         CAST,
@@ -35,18 +34,15 @@ public class MessageCast : MonoBehaviour {
 
     void Start() {
         _isInitialize = true;
-    }
-
-    void OnValidate() {
-        ExcuteMethods();
-    }
-
-    void Update() {
         this.UpdateAsObservable()
             .Where(_ => _isDo)
             .Subscribe(_ => {
                 _isDo = false;
             });
+    }
+
+    void OnValidate() {
+        ExcuteMethods();
     }
 
     /// <summary>
