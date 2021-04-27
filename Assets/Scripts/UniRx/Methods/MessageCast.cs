@@ -245,7 +245,7 @@ public class MessageCast : MonoBehaviour {
 
     private void ExcuteMethods() {
         if (!_isInitialize) {
-            // return;
+            return;
         }
         Clear();
         switch (_methodStatus) {
