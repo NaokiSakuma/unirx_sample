@@ -108,8 +108,6 @@ public class ObservableTime : MonoBehaviour {
             });
     }
 
-    // Frameもある
-
     /// <summary>
     /// 一定時間、値が発行されなかったらonErrorを発行する
     /// </summary>
@@ -128,6 +126,8 @@ public class ObservableTime : MonoBehaviour {
                 Debug.Log("Timeout OnCompleted");
             });
     }
+
+    // Frameもある
 
     /// <summary>
     /// 一定時間、値が発行されなかったら最後の値を流す
@@ -150,6 +150,7 @@ public class ObservableTime : MonoBehaviour {
 
     /// <summary>
     /// 最初は値を発行し、一定時間発行をしない
+    /// Sampleとの違いは、最初の値を発行する
     /// </summary>
     private void ExcuteThrottleFirst() {
         // キーが押されたらメッセージ発行
@@ -167,6 +168,7 @@ public class ObservableTime : MonoBehaviour {
 
     /// <summary>
     /// 一定間隔でメッセージを発行
+    /// ThrottleFirstとの違いは最後の値を発行する
     /// </summary>
     private void ExcuteSample() {
         // 1フレーム毎にメッセージを発行
