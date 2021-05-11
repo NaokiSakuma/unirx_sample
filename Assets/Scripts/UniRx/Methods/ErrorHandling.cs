@@ -131,7 +131,7 @@ public class ErrorHandling : MonoBehaviour {
     }
 
     /// <summary>
-    /// 例外発生時に、例外を補足して処理を行う
+    /// 例外発生時に、代わりのObservableを渡す
     /// </summary>
     private void ExcuteCatch() {
         Observable
@@ -162,7 +162,7 @@ public class ErrorHandling : MonoBehaviour {
     }
 
     /// <summary>
-    /// 指定した型の例外を補足する
+    /// 指定した型の例外発生時に、代わりのObservableを渡す
     /// </summary>
     private void CatchThrowError(Exception error) {
         Observable
