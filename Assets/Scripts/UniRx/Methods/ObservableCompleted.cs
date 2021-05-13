@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UniRx;
 using UniRx.Triggers;
 using System;
@@ -46,12 +45,13 @@ public class ObservableCompleted : MonoBehaviour {
         Observable
             .Timer(TimeSpan.FromSeconds(1))
             .Do(_ => Debug.Log("Do"))
+            .DoOnCompleted(() => Debug.Log("DoOnCompleted"))
             .Repeat()
             .Subscribe();
     }
 
     /// <summary>
-    /// ストリームのOnCompletedが呼ばれたら、同じストリームを指定回数生成する
+    /// 同じストリームを指定回数生成する
     /// </summary>
     private void ExcuteRepeatCount() {
         Observable
@@ -59,6 +59,7 @@ public class ObservableCompleted : MonoBehaviour {
             .Subscribe(x => {
                 Debug.Log("OnNext : " + x);
             }, () => {
+                // OnCompletedは1回しか呼ばれない
                 Debug.Log("OnCompleted");
             });
     }
